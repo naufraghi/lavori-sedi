@@ -1,4 +1,47 @@
 allow_embedding: false
+db_schema:
+  events:
+    client: none
+    columns:
+    - admin_ui: {width: 200}
+      name: title
+      type: string
+    - admin_ui: {width: 200}
+      name: start_time
+      type: datetime
+    - admin_ui: {width: 200}
+      name: end_time
+      type: datetime
+    - admin_ui: {width: 200}
+      name: description
+      type: string
+    - admin_ui: {width: 200}
+      name: location
+      type: string
+    - admin_ui: {width: 200}
+      name: participants
+      target: participants
+      type: link_multiple
+    - admin_ui: {width: 200}
+      name: archived
+      type: bool
+    server: full
+    title: Events
+  participants:
+    client: none
+    columns:
+    - admin_ui: {width: 200}
+      name: name
+      type: string
+    - admin_ui: {width: 200}
+      name: email
+      type: string
+    - admin_ui: {width: 200}
+      name: event
+      target: events
+      type: link_single
+    server: full
+    title: Participants
 dependencies:
 - config: {}
   dep_id: dep_lin1x4oec0ytd
@@ -16,3 +59,5 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/tables.yml
+startup: {module: EventsForm, type: form}
+startup_form: null

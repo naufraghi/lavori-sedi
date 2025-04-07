@@ -1,7 +1,11 @@
 unique_ids:
   assets:
     theme.css: 6G44GIEQQRJLILWU6GQSQO5BTDFT5ZI3
-  forms: {}
+  forms:
+    EventCard: '1744040719852355339314140.12665'
+    EventsForm: '1744039847849771203421902.499'
+    EventsForm.ItemTemplate1: '1744040534684671828511398.9618'
   modules: {}
   scripts: {}
-  server_modules: {}
+  server_modules:
+    ServerEvents: '1744040571641359220182153.587'
