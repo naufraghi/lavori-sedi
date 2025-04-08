@@ -40,6 +40,9 @@ db_schema:
       name: event
       target: events
       type: link_single
+    - admin_ui: {order: 3, width: 200}
+      name: role
+      type: string
     server: full
     title: Participants
 dependencies:

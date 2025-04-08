@@ -18,12 +18,26 @@ def get_upcoming_events():
         end=e['end_datetime'],
         location=e['location'],
         description=e['description'],
-        participants=[p['name'] for p in (e['participants'] if e['participants'] else [])]
+        participants=e['participants'] or []
     ) for e in events]
 
 @anvil.server.callable
-def sign_up(event_id, name, email):
+def sign_up(event_id, name, email, role):
     event = app_tables.events.get_by_id(event_id)
     if not event:
         raise Exception("Event not found")
-    app_tables.participants.add_row(name=name, email=email, event=event)
+    anvil.server.cookies.local["name"] = name
+    anvil.server.cookies.local["email"] = email
+    anvil.server.cookies.local["role"] = role
+    part = app_tables.participants.search(name=name, email=email, role=role)
+    if part is None:
+      part = app_tables.participants.add_row(name=name, email=email, role=role)
+    participants = event["participants"] if event["participants"] else []
+    event.update(participants=participants+[part])
+
+@anvil.server.callable
+def load_defaults():
+  name = anvil.server.cookies.local.get("name", "")
+  email = anvil.server.cookies.local.get("email", "")
+  role = anvil.server.cookies.local.get("role", "genitore")
+  return {"name": name, "email": email, "role": role}
