@@ -14,4 +14,4 @@ class EventsForm(EventsFormTemplate):
 
   def load_events(self):
       events = anvil.server.call('get_upcoming_events')
-      self.event_list.items = events
+      self.events_list.items = events

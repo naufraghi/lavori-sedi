@@ -8,7 +8,8 @@ from datetime import datetime
 @anvil.server.callable
 def get_upcoming_events():
     now = datetime.now()
-    events = app_tables.events.search(start_time__gte=now, archived=False, sort=True)
+    events = app_tables.events.search(tables.order_by("start_datetime"),
+                                      end_datetime=q.greater_than(now), archived=False)
     return [dict(
         id=e.get_id(),
         title=e['title'],
