@@ -1,10 +1,10 @@
 unique_ids:
   assets:
+    buon-vecchia-sede-gruppo-scouts-pescara-2-fse-via-brandimarte-foto-10-640x480.jpg: '1744108513939440036584170.26117'
     theme.css: 6G44GIEQQRJLILWU6GQSQO5BTDFT5ZI3
   forms:
     EventCard: '1744040719852355339314140.12665'
     EventsForm: '1744039847849771203421902.499'
-    EventsForm.ItemTemplate1: '1744040534684671828511398.9618'
   modules: {}
   scripts: {}
   server_modules:
