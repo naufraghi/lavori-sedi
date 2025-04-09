@@ -31,5 +31,8 @@ class SignupForm(SignupFormTemplate):
                       self.name_text.text,
                       self.email_text.text,
                       role)
-    alert("Thanks for signing up!")
+    open_form("EventsForm")
+
+  def indietro_button_click(self, **event_args):
+    """This method is called when the component is clicked."""
     open_form("EventsForm")

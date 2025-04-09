@@ -29,11 +29,11 @@ def sign_up(event_id, name, email, role):
     anvil.server.cookies.local["name"] = name
     anvil.server.cookies.local["email"] = email
     anvil.server.cookies.local["role"] = role
-    part = app_tables.participants.search(name=name, email=email, role=role)
+    part = app_tables.participants.get(name=name, email=email, role=role)
     if part is None:
       part = app_tables.participants.add_row(name=name, email=email, role=role)
-    participants = event["participants"] if event["participants"] else []
-    event.update(participants=participants+[part])
+      participants = event["participants"] if event["participants"] else []
+      event["participants"] = participants+[part]
 
 @anvil.server.callable
 def load_defaults():
