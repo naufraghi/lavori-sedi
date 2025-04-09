@@ -1,11 +1,11 @@
 unique_ids:
   assets:
     CNGEIsezioni_48_formatoSito.png: '1744184879176416468824589.5876'
-    buon-vecchia-sede-gruppo-scouts-pescara-2-fse-via-brandimarte-foto-10-640x480.jpg: '1744108513939440036584170.26117'
     logo.svg: '1744184907853823066959827.5846'
     mappa-catasto-de-canal-33bis.png: '1744185347537208936960700.5901'
     theme.css: 6G44GIEQQRJLILWU6GQSQO5BTDFT5ZI3
   forms:
+    EditEvent: '1744204377735483204550744.755'
     EventCard: '1744040719852355339314140.12665'
     EventsForm: '1744039847849771203421902.499'
     SignupForm: '1744148551915636599112550.3966'

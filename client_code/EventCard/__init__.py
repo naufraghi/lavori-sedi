@@ -40,6 +40,7 @@ class EventCard(EventCardTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     self.item = properties.get("item")
+    self.edit_button.visible = anvil.server.call('is_clan')
     self.populate()
 
   def populate(self):
@@ -49,10 +50,21 @@ class EventCard(EventCardTemplate):
     participants = []
     for p in self.item['participants']:
       participants.append(f"{p['name']} ({p['role']})")
-    self.participants.content = "👥 " + ", ".join(participants)
+    manager = self.item['manager']
+    if not manager:
+      manager = '...'
+    else:
+      manager = f"{manager['name']} ({manager['role']})"
+    self.participants.content = f"👷🏾 {manager} | 👥 " + ", ".join(participants)
 
   def signup_click(self, **event_args):
     # Open modal to sign up, passing the event ID
     open_form('SignupForm',
               event_id=self.item['id'],
               event_title=self.title.content)
+
+  def edit_button_click(self, **event_args):
+    event = anvil.server.call("get_event", self.item['id'])
+    open_form('EditEvent',
+              event_id=self.item['id'],
+              item=event)

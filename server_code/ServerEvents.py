@@ -18,8 +18,26 @@ def get_upcoming_events():
         end=e['end_datetime'],
         location=e['location'],
         description=e['description'],
-        participants=e['participants'] or []
+        participants=e['participants'] or [],
+        manager=e['manager']
     ) for e in events]
+
+@anvil.server.callable
+def get_event(event_id):
+    return app_tables.events.get_by_id(event_id)
+
+@anvil.server.callable
+def set_event(event_id, **new_values):
+    event = app_tables.events.get_by_id(event_id)
+    manager_name = new_values.pop("manager_name", None)
+    manager = app_tables.participants.get(name=manager_name, manager=True)
+    event['manager'] = manager
+    for key in new_values:
+      event[key] = new_values[key]
+
+@anvil.server.callable
+def get_managers():
+  return app_tables.participants.search(manager=True)
 
 @anvil.server.callable
 def sign_up(event_id, name, email, role):
@@ -41,3 +59,7 @@ def load_defaults():
   email = anvil.server.cookies.local.get("email", "")
   role = anvil.server.cookies.local.get("role", "genitore")
   return {"name": name, "email": email, "role": role}
+
+@anvil.server.callable
+def is_clan():
+  return anvil.server.cookies.local.get("role", "genitore") == "clan"
