@@ -30,7 +30,11 @@ ITALIAN_LOCALE = {
   "Sun": "Dom",
 }
 
-Translations.set_dictionary('IT', ITALIAN_LOCALE)
+def localize_date(message):
+  words = message.split()
+  for i, word in enumerate(words):
+    words[i] = ITALIAN_LOCALE.get(word, word)
+  return " ".join(words)
 
 class EventCard(EventCardTemplate):
   def __init__(self, **properties):
@@ -39,7 +43,7 @@ class EventCard(EventCardTemplate):
     self.populate()
 
   def populate(self):
-    timestamp = f"{self.item['start'].strftime('%a %d %b, %H:%M')} - {self.item['end'].strftime('%H:%M')}"
+    timestamp = localize_date(f"{self.item['start'].strftime('%a %d %b, %H:%M')} - {self.item['end'].strftime('%H:%M')}")
     self.title.content = f"## 🧰 {self.item['title']} | 🗓 {timestamp} | 📍 {self.item['location']}"
     self.description.content = self.item['description']
     participants = []
