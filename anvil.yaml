@@ -46,7 +46,7 @@ dependencies:
   dep_id: dep_lin1x4oec0ytd
   resolution_hints: {app_id: 4UK6WHQ6UX7AKELK, name: Material 3 Theme, package_name: m3}
   version: {version_tag: v1.2.2}
-metadata: {logo_img: 'asset:buon-vecchia-sede-gruppo-scouts-pescara-2-fse-via-brandimarte-foto-10-640x480.jpg', title: Lavori sedi CNGEI Torino}
+metadata: {logo_img: 'asset:logo.svg', title: Lavori sedi CNGEI Torino}
 name: Lavori sedi
 native_deps: null
 package_name: Lavori_sedi

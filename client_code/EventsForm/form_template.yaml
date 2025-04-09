@@ -2,15 +2,55 @@ components:
 - components:
   - layout_properties: {grid_position: 'ZSMWIM,ZCSKLT'}
     name: main_heading
-    properties: {icon: '', text: 🏠 Lavori nelle sedi}
+    properties:
+      icon: ''
+      scale: medium
+      spacing:
+        margin: [null, null, 0, null]
+        padding: [null, null, 0, null]
+      text: 🏠 Lavori nelle sedi
     type: form:dep_lin1x4oec0ytd:_Components.Heading
+  - layout_properties: {grid_position: 'ACBFWY,ERMRFS'}
+    name: rich_text_intro
+    properties:
+      content: |-
+        Questo è il calendario dei prossimi lavori nelle sedi, in particolare nella sede To1.
+
+        Come sapete la Sezione CNGEI Torino ha vinto un bando per l'assegnazione dei locali di Via De Canal 33bis/A, ma questa assegnazione comporta anche una serie di oneri, tra i quali una sostanziale ristrutturazione 🛠 .
+        I soci del Clan (adulti della Sezione non impegnati in attività con i ragazzi/e) sono già attivi da mesi nei lavori 🪚, e con loro alcuni genitori 🧹, ma gli sforzi non sono sufficienti per rispettare la tabella di marcia.
+
+        C'è ancora bisogno dell'aiuto di tutti! Fermatevi a parlare con capi o dirigenti per avere più informazioni.
+      spacing:
+        margin: [null, null, null, 0]
+        padding: [null, 10, null, 10]
+    type: RichText
   - layout_properties: {grid_position: 'PXGMXA,IPMWMG'}
     name: events_list
     properties: {item_template: EventCard}
     type: RepeatingPanel
+  - components:
+    - name: mappa_catasto
+      properties: {display_mode: original_size, height: 291, source: _/theme/mappa-catasto-de-canal-33bis.png}
+      type: Image
+    layout_properties: {grid_position: 'HLSJDB,ZHVHYB'}
+    name: rich_text_avanzamento
+    properties:
+      content: |-
+        # Avanzamento dei lavori
+
+        | Stanza         | Avanzamento |
+        |--------------------|------------------------|
+        | Grande        | 🔴🔴🔴⭕️⭕️ |
+        | Cos              | 🔴🔴🔴🔴🔴 |
+        | Branco        | 🔴🔴🔴🔴🔴 |
+        | Compa        | 🔴🔴🔴🔴⭕️ |
+        | Reparto       | 🔴🔴🔴⭕️⭕️ |
+        | Clan             | 🔴🔴🔴⭕️⭕️ |
+        | Magazzino | 🔴⭕️⭕️⭕️⭕️ |
+    type: RichText
   layout_properties: {grid_position: 'RFNDEN,XYDZBW'}
   name: main_column
-  properties: {}
+  properties: {col_spacing: medium, spacing_below: small}
   type: ColumnPanel
 container: {type: ColumnPanel}
 is_package: true
