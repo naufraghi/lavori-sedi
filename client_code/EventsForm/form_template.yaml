@@ -3,12 +3,13 @@ components:
   - layout_properties: {grid_position: 'ZSMWIM,ZCSKLT'}
     name: main_heading
     properties:
+      align: center
       icon: ''
       scale: medium
       spacing:
         margin: [null, null, 0, null]
         padding: [null, null, 0, null]
-      text: 🏠 Lavori nelle sedi
+      text: 🏠 Lavori nelle sedi 🗓
     type: form:dep_lin1x4oec0ytd:_Components.Heading
   - layout_properties: {grid_position: 'ACBFWY,ERMRFS'}
     name: rich_text_intro

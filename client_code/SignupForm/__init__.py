@@ -5,7 +5,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-@routing.route('signup')
 class SignupForm(SignupFormTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
