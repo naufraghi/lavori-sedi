@@ -55,6 +55,26 @@ def sign_up(event_id, name, email, role):
       event["participants"] = participants+[part]
 
 @anvil.server.callable
+def is_signed_up(event_id, name, email, role):
+    event = app_tables.events.get_by_id(event_id)
+    if not event:
+        raise Exception("Event not found")
+    participants = event["participants"] if event["participants"] else []
+    return app_tables.participants.get(name=name, email=email, role=role) in participants
+
+@anvil.server.callable
+def sign_out(event_id, name, email, role):
+    event = app_tables.events.get_by_id(event_id)
+    if not event:
+        raise Exception("Event not found")
+    part = app_tables.participants.get(name=name, email=email, role=role)
+    if part is None:
+      return False
+    participants = event["participants"] if event["participants"] else []
+    if part in participants:
+      event["participants"] = [p for p in participants if (p != part)]
+
+@anvil.server.callable
 def load_defaults():
   name = anvil.server.cookies.local.get("name", "")
   email = anvil.server.cookies.local.get("email", "")

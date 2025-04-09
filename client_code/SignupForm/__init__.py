@@ -21,6 +21,17 @@ class SignupForm(SignupFormTemplate):
     else:
       self.genitore_radio.selected = False
       self.clan_radio.selected = True
+    if self.genitore_radio.selected:
+      role = "genitore"
+    else:
+      role = "clan"
+    if anvil.server.call('is_signed_up', self.event_id,
+                        self.name_text.text,
+                        self.email_text.text,
+                        role):
+      self.rimuovi_button.enabled = True
+    else:
+      self.rimuovi_button.enabled = False      
 
   def iscriviti_button_click(self, **event_args):
     if self.genitore_radio.selected:
@@ -35,4 +46,15 @@ class SignupForm(SignupFormTemplate):
 
   def indietro_button_click(self, **event_args):
     """This method is called when the component is clicked."""
+    open_form("EventsForm")
+
+  def rimuovi_button_click(self, **event_args):
+    if self.genitore_radio.selected:
+      role = "genitore"
+    else:
+      role = "clan"
+    anvil.server.call('sign_out', self.event_id,
+                      self.name_text.text,
+                      self.email_text.text,
+                      role)
     open_form("EventsForm")

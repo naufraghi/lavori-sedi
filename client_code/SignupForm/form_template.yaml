@@ -38,6 +38,11 @@ components:
           name: spacer_2
           properties: {}
           type: Spacer
+        - event_bindings: {click: rimuovi_button_click}
+          layout_properties: {}
+          name: rimuovi_button
+          properties: {appearance: tonal, enabled: true, text: Rimuovi}
+          type: form:dep_lin1x4oec0ytd:_Components.Button
         - event_bindings: {click: indietro_button_click}
           layout_properties: {}
           name: indietro_button
