@@ -50,7 +50,8 @@ def sign_up(event_id, name, email, role):
     part = app_tables.participants.get(name=name, email=email, role=role)
     if part is None:
       part = app_tables.participants.add_row(name=name, email=email, role=role)
-      participants = event["participants"] if event["participants"] else []
+    participants = event["participants"] if event["participants"] else []
+    if part not in participants:
       event["participants"] = participants+[part]
 
 @anvil.server.callable

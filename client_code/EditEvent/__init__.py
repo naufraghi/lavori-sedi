@@ -35,3 +35,7 @@ class EditEvent(EditEventTemplate):
       new_values["manager_name"] = self.manager_dropdown.selected_value
     anvil.server.call("set_event", self.event_id, **new_values)
     open_form("EventsForm")
+
+  def indietro_button_click(self, **event_args):
+    """This method is called when the component is clicked."""
+    open_form("EventsForm")
