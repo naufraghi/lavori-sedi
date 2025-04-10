@@ -6,6 +6,10 @@ components:
         properties: {}
         type: RichText
       - layout_properties: {}
+        name: indicazioni_text
+        properties: {italic: true, text: 'L''orario di partecipazione è indicativo, comunicate per altre vie eventuali note.'}
+        type: form:dep_lin1x4oec0ytd:_Components.Text
+      - layout_properties: {}
         name: name_text
         properties: {label: Nome, placeholder: Mario}
         type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
