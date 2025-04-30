@@ -7,18 +7,18 @@ from anvil.tables import app_tables
 
 ITALIAN_LOCALE = {
   # Months
-  "Jan": "Gen",
-  "Feb": "Feb",
-  "Mar": "Mar",
-  "Apr": "Apr",
-  "May": "Mag",
-  "Jun": "Giu",
-  "Jul": "Lug",
-  "Aug": "Ago",
-  "Sep": "Set",
-  "Oct": "Ott",
-  "Nov": "Nov",
-  "Dec": "Dic",
+  "Jan,": "Gen,",
+  "Feb,": "Feb,",
+  "Mar,": "Mar,",
+  "Apr,": "Apr,",
+  "May,": "Mag,",
+  "Jun,": "Giu,",
+  "Jul,": "Lug,",
+  "Aug,": "Ago,",
+  "Sep,": "Set,",
+  "Oct,": "Ott,",
+  "Nov,": "Nov,",
+  "Dec,": "Dic,",
   
   # Weekdays
   "Mon": "Lun",
