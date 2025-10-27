@@ -39,27 +39,24 @@ components:
       content: |
         # Avanzamento dei lavori Sede To1
 
-        Le cose da fare sono:
-        - dare due mani allo stanzone grande
-        - rimuovere pezzi di ferro dal soffitto dallo stanzone grande e stuccarlo
-        - mettere sfiati per aria nel muro in cartongesso nello stanzone grande
-        - mettere battiscopa nello stanzone grande
-        - stuccare le pareti nella stanza di clan
-        - dare un'altra mano di bianco in stanza clan
-        - portare mobile dalla cucina alla stanza di clan
-        - dare una o due mani di bianco nella stanza di reparto
-        - pulizia approfondita di tutte le stanze
+        ## Periodicamente:
+        - raccogliere le foglie dal cortile e tetti
+
+        ## Attività una tantum:
+        - intonacare/ripristinare gli intonaci esterni (sarebbe utile trovare qualcuno "almeno un po' esperto");
+        - raschiare la vernice vecchia e ri-verniciare le inferriate;
+        - restauro pareti e soffitto magazzino.
 
         | Stanza         | Avanzamento |
         |--------------------|------------------------|
         | Grande        | 🔴🔴🔴🔴⭕️ |
         | Cos              | 🔴🔴🔴🔴🔴🥳 |
         | Branco        | 🔴🔴🔴🔴🔴🥳 |
-        | Compa        | 🔴🔴🔴🔴⭕️ |
+        | Compa        | 🔴🔴🔴🔴🔴🥳 |
         | Reparto       | 🔴🔴🔴🔴⭕️ |
-        | Clan             | 🔴🔴🔴🔴⭕️ |
+        | Clan             | 🔴🔴🔴🔴🔴 |
         | Magazzino | 🔴⭕️⭕️⭕️⭕️ |
-        | Cucina        | 🔴🔴🔴⭕️⭕️ |
+        | Cucina        | 🔴🔴🔴🔴🔴🥳 |
     type: RichText
   layout_properties: {grid_position: 'RFNDEN,XYDZBW'}
   name: main_column
