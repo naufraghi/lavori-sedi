@@ -41,6 +41,7 @@ class EventCard(EventCardTemplate):
     self.init_components(**properties)
     self.item = properties.get("item")
     self.edit_button.visible = anvil.server.call('is_clan')
+    self.signup.enabled = not self.item['hidden']
     self.populate()
 
   def populate(self):

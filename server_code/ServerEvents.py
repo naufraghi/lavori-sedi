@@ -9,8 +9,10 @@ from datetime import datetime
 @anvil.server.callable
 def get_upcoming_events():
     now = datetime.now(anvil.tz.tzlocal())
-    events = app_tables.events.search(tables.order_by("start_datetime"),
-                                      end_datetime=q.greater_than(now), archived=False)
+    kwargs = {"end_datetime": q.greater_than(now)}
+    if not is_clan():
+      kwargs['hidden'] = False
+    events = app_tables.events.search(tables.order_by("start_datetime"), **kwargs)
     return [dict(
         id=e.get_id(),
         title=e['title'],
@@ -19,7 +21,8 @@ def get_upcoming_events():
         location=e['location'],
         description=e['description'],
         participants=e['participants'] or [],
-        manager=e['manager']
+        manager=e['manager'],
+        hidden=e['hidden'],
     ) for e in events]
 
 @anvil.server.callable
@@ -34,6 +37,15 @@ def set_event(event_id, **new_values):
     event['manager'] = manager
     for key in new_values:
       event[key] = new_values[key]
+
+@anvil.server.callable
+def duplicate_event(event_id):
+  event = app_tables.events.get_by_id(event_id)
+  new_event = app_tables.events.add_row(**dict(event))
+  new_event['title'] = new_event['title'] + " (copia)"
+  new_event['hidden'] = True
+  new_event['participants'] = []
+  return new_event
 
 @anvil.server.callable
 def get_managers():

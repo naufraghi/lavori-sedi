@@ -22,8 +22,8 @@ db_schema:
       name: participants
       target: participants
       type: link_multiple
-    - admin_ui: {width: 200}
-      name: archived
+    - admin_ui: {order: 7, width: 200}
+      name: hidden
       type: bool
     - admin_ui: {width: 200}
       name: manager
