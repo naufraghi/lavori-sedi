@@ -54,7 +54,7 @@ components:
       - event_bindings: {click: duplica_button_click}
         layout_properties: {}
         name: duplica_button
-        properties: {text: Duplica}
+        properties: {appearance: outlined, icon: 'mi:ad_group', text: Duplica}
         type: form:dep_lin1x4oec0ytd:_Components.Button
       - event_bindings: {click: indietro_button_click}
         layout_properties: {}
