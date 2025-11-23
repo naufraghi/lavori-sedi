@@ -9,8 +9,12 @@ class EventsForm(EventsFormTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.admin = properties.get('admin', False)
     self.load_events()
 
   def load_events(self):
-      events = anvil.server.call('get_upcoming_events')
+      if self.admin:
+        events = anvil.server.call('get_all_events')
+      else:
+        events = anvil.server.call('get_upcoming_events')
       self.events_list.items = events

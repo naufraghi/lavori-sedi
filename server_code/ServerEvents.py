@@ -26,6 +26,21 @@ def get_upcoming_events():
     ) for e in events]
 
 @anvil.server.callable
+def get_all_events():
+  events = app_tables.events.search(tables.order_by("start_datetime"))
+  return [dict(
+    id=e.get_id(),
+    title=e['title'],
+    start=e['start_datetime'],
+    end=e['end_datetime'],
+    location=e['location'],
+    description=e['description'],
+    participants=e['participants'] or [],
+    manager=e['manager'],
+    hidden=e['hidden'],
+  ) for e in events]
+
+@anvil.server.callable
 def get_event(event_id):
     return app_tables.events.get_by_id(event_id)
 
