@@ -96,3 +96,7 @@ def load_defaults():
 @anvil.server.callable
 def is_clan():
   return anvil.server.cookies.local.get("role", "genitore") == "clan"
+
+@anvil.server.route("/admin-events")
+def admin_events(**p):
+  return anvil.server.FormResponse('EventsForm', admin=True)
