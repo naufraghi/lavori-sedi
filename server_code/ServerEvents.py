@@ -23,6 +23,7 @@ def get_upcoming_events():
         participants=e['participants'] or [],
         manager=e['manager'],
         hidden=e['hidden'],
+        modify=is_clan()
     ) for e in events]
 
 @anvil.server.callable
@@ -38,6 +39,7 @@ def get_all_events():
     participants=e['participants'] or [],
     manager=e['manager'],
     hidden=e['hidden'],
+    modify=True,
   ) for e in events]
 
 @anvil.server.callable
