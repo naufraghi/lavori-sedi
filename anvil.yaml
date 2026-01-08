@@ -32,7 +32,7 @@ db_schema:
     server: full
     title: Events
   participants:
-    client: none
+    client: search
     columns:
     - admin_ui: {width: 200}
       name: name

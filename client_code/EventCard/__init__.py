@@ -50,7 +50,10 @@ class EventCard(EventCardTemplate):
     self.description.content = self.item['description']
     participants = []
     for p in self.item['participants']:
-      participants.append(f"{p['name']} ({p['role']})")
+      if p:
+        participants.append(f"{p['name']} ({p['role']})")
+      else:
+        participants.append("<nome-rimosso>")
     manager = self.item['manager']
     if not manager:
       manager = '...'

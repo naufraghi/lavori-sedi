@@ -49,9 +49,6 @@ def get_event(event_id):
 @anvil.server.callable
 def set_event(event_id, **new_values):
     event = app_tables.events.get_by_id(event_id)
-    manager_name = new_values.pop("manager_name", None)
-    manager = app_tables.participants.get(name=manager_name, manager=True)
-    event['manager'] = manager
     for key in new_values:
       event[key] = new_values[key]
 

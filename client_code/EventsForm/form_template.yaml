@@ -30,6 +30,11 @@ components:
     name: events_list
     properties: {item_template: EventCard}
     type: RepeatingPanel
+  - event_bindings: {}
+    layout_properties: {grid_position: 'XNAANY,GEMOEY'}
+    name: link_1
+    properties: {text: Admin}
+    type: form:dep_lin1x4oec0ytd:_Components.Link
   - components:
     - name: mappa_catasto
       properties: {display_mode: original_size, height: 291, source: _/theme/mappa-catasto-de-canal-33bis.png}

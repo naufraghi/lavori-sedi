@@ -18,3 +18,9 @@ class EventsForm(EventsFormTemplate):
       else:
         events = anvil.server.call('get_upcoming_events')
       self.events_list.items = events
+
+  @handle("link_1", "click")
+  def link_1_click(self, **event_args):
+    """This method is called clicked"""
+    self.admin = True
+    self.load_events()

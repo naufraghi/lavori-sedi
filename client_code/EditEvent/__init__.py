@@ -20,9 +20,8 @@ class EditEvent(EditEventTemplate):
     self.event_duration.selected_value = f"{int(duration.total_seconds()/(60*60))}h"
     self.event_description.text = self.item["description"]
     self.event_hidden.checked = self.item["hidden"]
-    managers = [m['name'] for m in (anvil.server.call('get_managers') or [])]
-    self.manager_dropdown.items = managers
-    self.manager_dropdown.selected_value = self.item['manager']['name'] if self.item['manager'] else None
+    self.manager_dropdown.items = [(m['name'], m) for m in (anvil.server.call('get_managers') or [])]
+    self.manager_dropdown.selected_value = self.item['manager'] #['name'] if self.item['manager'] else None
 
   def save_button_click(self, **event_args):
     new_values = {}
@@ -32,8 +31,7 @@ class EditEvent(EditEventTemplate):
     new_values["start_datetime"] = datetime.combine(self.event_date.date, time(hour, minute))
     duration = int(self.event_duration.selected_value.strip("h"))
     new_values["end_datetime"] = datetime.combine(self.event_date.date, time(hour+duration, minute))
-    if self.manager_dropdown.selected_value:
-      new_values["manager_name"] = self.manager_dropdown.selected_value
+    new_values["manager"] = self.manager_dropdown.selected_value
     new_values["hidden"] = self.event_hidden.checked
     anvil.server.call("set_event", self.event_id, **new_values)
     open_form("EventsForm")
