@@ -12,8 +12,14 @@ def get_event_locations():
   for event in app_tables.events.search():
     location = event["location"]
     if location:
-      locations.add(location)
-  return sorted(locations)
+      location = location.strip()
+      if location:
+        locations.add(location)
+
+  canonical_locations = {}
+  for location in sorted(locations, key=lambda value: (value.casefold(), value)):
+    canonical_locations.setdefault(location.casefold(), location)
+  return list(canonical_locations.values())
 
 @anvil.server.callable
 def get_upcoming_events():
@@ -68,6 +74,39 @@ def set_event(event_id, **new_values):
     event = app_tables.events.get_by_id(event_id)
     for key in new_values:
       event[key] = new_values[key]
+
+@anvil.server.callable
+def create_event(title, start_datetime, end_datetime, description, location,
+                 manager=None, hidden=False):
+  title = (title or "").strip()
+  location = (location or "").strip()
+  if not title:
+    return {"ok": False, "message": "Inserisci il titolo dell'evento."}
+  if not location:
+    return {"ok": False, "message": "Scegli o inserisci una sede."}
+  if end_datetime <= start_datetime:
+    return {"ok": False, "message": "La fine dell'evento deve essere successiva all'inizio."}
+
+  for existing_location in get_event_locations():
+    if existing_location.casefold() == location.casefold():
+      location = existing_location
+      break
+
+  if manager is not None:
+    manager = app_tables.participants.get_by_id(manager.get_id())
+    if manager is None or not manager["manager"]:
+      return {"ok": False, "message": "Seleziona un referente valido."}
+
+  app_tables.events.add_row(
+    title=title,
+    start_datetime=start_datetime,
+    end_datetime=end_datetime,
+    description=description or "",
+    location=location,
+    manager=manager,
+    hidden=bool(hidden),
+  )
+  return {"ok": True}
 
 @anvil.server.callable
 def duplicate_event(event_id):

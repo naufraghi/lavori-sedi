@@ -1,0 +1,27 @@
+<anvil-form container="ColumnPanel">
+    <anvil-component type="m3._Components.Card" name="card_1" container:grid_position="FQQHSM,UVQMMC">
+        <anvil-component type="m3._Components.Card.CardContentContainer" name="card_content_container_1" container:slot="card-content-slot">
+            <anvil-component type="FlowPanel" name="location_panel" prop:align="justify" prop:gap="medium" container:slot="card-content-container-slot">
+                <anvil-component type="m3._Components.DropdownMenu" name="location_picker" prop:allow_none="true" prop:appearance="outlined" prop:label="Sede" prop:placeholder="Scegli una sede"></anvil-component>
+                <anvil-component type="m3._Components.Button" name="new_location_button" prop:appearance="outlined" prop:icon="mi:add" prop:text="Nuova sede" on:click="self.new_location_click"></anvil-component>
+                <anvil-component type="m3._Components.TextInput.TextBox" name="new_location_text" prop:label="Nome nuova sede" prop:placeholder="Es. TO3" prop:visible="false"></anvil-component>
+                <anvil-component type="m3._Components.Button" name="existing_location_button" prop:appearance="outlined" prop:text="Scegli sede già usata" prop:visible="false" on:click="self.existing_location_click"></anvil-component>
+            </anvil-component>
+            <anvil-component type="FlowPanel" name="flow_panel_1" prop:align="justify" prop:gap="medium" container:slot="card-content-container-slot">
+                <anvil-component type="m3._Components.TextInput.TextBox" name="event_title" prop:label="Titolo" prop:placeholder="Lavori in sede" prop:text="Lavori in sede"></anvil-component>
+                <anvil-component type="DatePicker" name="event_date" prop:format="%a %d %b" prop:pick_time="false"></anvil-component>
+                <anvil-component type="m3._Components.DropdownMenu" name="event_start" prop:icon="mi:nest_clock_farsight_analog" prop:items='["09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00"]' prop:label="Ora inizio" container:width="164.66699999999997"></anvil-component>
+                <anvil-component type="m3._Components.DropdownMenu" name="event_duration" prop:items='["1h","2h","3h","4h","5h","6h"]' prop:label="Durata" container:width="127.667"></anvil-component>
+            </anvil-component>
+            <anvil-component type="m3._Components.TextInput.TextArea" name="event_description" prop:height="403" prop:label="Descrizione" prop:placeholder="" container:slot="card-content-container-slot"></anvil-component>
+            <anvil-component type="m3._Components.DropdownMenu" name="manager_dropdown" prop:allow_none="true" prop:label="Referente" container:slot="card-content-container-slot"></anvil-component>
+            <anvil-component type="FlowPanel" name="flow_panel_2" prop:vertical_align="middle" container:slot="card-content-container-slot">
+                <anvil-component type="m3._Components.Button" name="save_button" prop:text="Salva" on:click="self.save_button_click"></anvil-component>
+                <anvil-component type="m3._Components.Checkbox" name="event_hidden" prop:text="Nascosto"></anvil-component>
+                <anvil-component type="Spacer" name="spacer_1" container:expand="true"></anvil-component>
+                <anvil-component type="m3._Components.Button" name="duplica_button" prop:appearance="outlined" prop:icon="mi:ad_group" prop:text="Duplica" on:click="self.duplica_button_click"></anvil-component>
+                <anvil-component type="m3._Components.Button" name="indietro_button" prop:appearance="outlined" prop:icon="mi:keyboard_backspace" prop:text="Indietro" on:click="self.indietro_button_click"></anvil-component>
+            </anvil-component>
+        </anvil-component>
+    </anvil-component>
+</anvil-form>

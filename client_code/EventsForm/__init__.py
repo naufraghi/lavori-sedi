@@ -12,6 +12,7 @@ class EventsForm(EventsFormTemplate):
     self.location_picker.visible = not self.admin
     self.recent_events_button.visible = self.admin
     self.past_events_button.visible = self.admin
+    self.new_event_button.visible = self.admin
     self.update_admin_filter_buttons()
     self.load_events()
 
@@ -52,6 +53,9 @@ class EventsForm(EventsFormTemplate):
     self.update_admin_filter_buttons()
     self.load_events()
 
+  def new_event_click(self, **event_args):
+    open_form("EditEvent", admin=True, past_events=self.past_events)
+
   def update_admin_filter_buttons(self):
     if self.past_events:
       self.recent_events_button.appearance = 'outlined'
@@ -62,7 +66,9 @@ class EventsForm(EventsFormTemplate):
 
   def show_location(self, location):
     if location:
-      events = [event for event in self.all_events if event['location'] == location]
+      normalized_location = location.strip().casefold()
+      events = [event for event in self.all_events
+                if (event['location'] or '').strip().casefold() == normalized_location]
     else:
       events = self.all_events
 
