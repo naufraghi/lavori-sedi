@@ -66,9 +66,9 @@ class EventsForm(EventsFormTemplate):
 
   def show_location(self, location):
     if location:
-      normalized_location = location.strip().casefold()
+      normalized_location = location.strip().lower()
       events = [event for event in self.all_events
-                if (event['location'] or '').strip().casefold() == normalized_location]
+                if (event['location'] or '').strip().lower() == normalized_location]
     else:
       events = self.all_events
 
