@@ -13,6 +13,9 @@ class EditEvent(EditEventTemplate):
     self.init_components(**properties)
     # Any code you write here will run before the form opens.
     self.event_id = properties.get("event_id")
+    self.location = properties.get("location", self.item["location"])
+    self.admin = properties.get("admin", False)
+    self.past_events = properties.get("past_events", False)
     self.event_title.text = self.item["title"]
     self.event_date.date = self.item["start_datetime"].date()
     self.event_start.selected_value = self.item["start_datetime"].strftime('%H:%M')
@@ -24,22 +27,31 @@ class EditEvent(EditEventTemplate):
     self.manager_dropdown.selected_value = self.item['manager'] #['name'] if self.item['manager'] else None
 
   def save_button_click(self, **event_args):
+    event_date = self.event_date.date
+    if event_date is None:
+      alert("Seleziona una data per l'evento.")
+      return
+
     new_values = {}
     new_values["title"] = self.event_title.text
     new_values["description"] = self.event_description.text
     hour, minute = map(int, self.event_start.selected_value.split(":"))
-    new_values["start_datetime"] = datetime.combine(self.event_date.date, time(hour, minute))
+    new_values["start_datetime"] = datetime.combine(event_date, time(hour, minute))
     duration = int(self.event_duration.selected_value.strip("h"))
-    new_values["end_datetime"] = datetime.combine(self.event_date.date, time(hour+duration, minute))
+    new_values["end_datetime"] = datetime.combine(event_date, time(hour+duration, minute))
     new_values["manager"] = self.manager_dropdown.selected_value
     new_values["hidden"] = self.event_hidden.checked
     anvil.server.call("set_event", self.event_id, **new_values)
-    open_form("EventsForm")
+    open_form("EventsForm", location=self.location, admin=self.admin,
+              past_events=self.past_events)
 
   def duplica_button_click(self, **event_args):
     new_event = anvil.server.call('duplicate_event', self.event_id)
-    open_form("EditEvent", event_id=new_event.get_id(), item=new_event)
+    open_form("EditEvent", event_id=new_event.get_id(), item=new_event,
+              location=self.location, admin=self.admin,
+              past_events=self.past_events)
   
   def indietro_button_click(self, **event_args):
     """This method is called when the component is clicked."""
-    open_form("EventsForm")
+    open_form("EventsForm", location=self.location, admin=self.admin,
+              past_events=self.past_events)

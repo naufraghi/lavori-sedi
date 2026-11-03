@@ -65,10 +65,16 @@ class EventCard(EventCardTemplate):
     # Open modal to sign up, passing the event ID
     open_form('SignupForm',
               event_id=self.item['id'],
-              event_title=self.title.content)
+              event_title=self.title.content,
+              location=self.item['location'] or "Sede non specificata",
+              admin=self.item['modify'],
+              past_events=self.item.get('past_events', False))
 
   def edit_button_click(self, **event_args):
     event = anvil.server.call("get_event", self.item['id'])
     open_form('EditEvent',
               event_id=self.item['id'],
-              item=event)
+              item=event,
+              location=self.item['location'] or "Sede non specificata",
+              admin=self.item['modify'],
+              past_events=self.item.get('past_events', False))

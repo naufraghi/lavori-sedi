@@ -4,7 +4,16 @@ from anvil.tables import app_tables
 import anvil.server
 import anvil.tz
 
-from datetime import datetime
+from datetime import datetime, timedelta
+
+@anvil.server.callable
+def get_event_locations():
+  locations = set()
+  for event in app_tables.events.search():
+    location = event["location"]
+    if location:
+      locations.add(location)
+  return sorted(locations)
 
 @anvil.server.callable
 def get_upcoming_events():
@@ -27,8 +36,16 @@ def get_upcoming_events():
     ) for e in events]
 
 @anvil.server.callable
-def get_all_events():
+def get_all_events(past_events=None):
   events = app_tables.events.search(tables.order_by("start_datetime"))
+  if past_events is not None:
+    cutoff = datetime.now(anvil.tz.tzlocal()) - timedelta(hours=24)
+    if past_events:
+      events = [e for e in events
+                if e['end_datetime'] is not None and e['end_datetime'] <= cutoff]
+    else:
+      events = [e for e in events
+                if e['end_datetime'] is not None and e['end_datetime'] > cutoff]
   return [dict(
     id=e.get_id(),
     title=e['title'],

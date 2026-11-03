@@ -10,7 +10,10 @@ class SignupForm(SignupFormTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.event_id = properties.get("event_id")
-    self.evento_text.content = properties.get("event_title")
+    self.evento_text.content = properties.get("event_title") or ""
+    self.location = properties.get("location")
+    self.admin = properties.get("admin", False)
+    self.past_events = properties.get("past_events", False)
     self.defaults = anvil.server.call("load_defaults")
     self.name_text.text = self.defaults.get("name", "")
     self.email_text.text = self.defaults.get("email", "")
@@ -42,11 +45,13 @@ class SignupForm(SignupFormTemplate):
                       self.name_text.text,
                       self.email_text.text,
                       role)
-    open_form("EventsForm")
+    open_form("EventsForm", location=self.location, admin=self.admin,
+              past_events=self.past_events)
 
   def indietro_button_click(self, **event_args):
     """This method is called when the component is clicked."""
-    open_form("EventsForm")
+    open_form("EventsForm", location=self.location, admin=self.admin,
+              past_events=self.past_events)
 
   def rimuovi_button_click(self, **event_args):
     if self.genitore_radio.selected:
@@ -57,4 +62,5 @@ class SignupForm(SignupFormTemplate):
                       self.name_text.text,
                       self.email_text.text,
                       role)
-    open_form("EventsForm")
+    open_form("EventsForm", location=self.location, admin=self.admin,
+              past_events=self.past_events)

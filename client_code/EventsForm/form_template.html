@@ -1,0 +1,14 @@
+<anvil-form container="ColumnPanel">
+  <anvil-component type="ColumnPanel" name="main_column" prop:col_spacing="medium" prop:spacing_below="small" container:grid_position="RFNDEN,XYDZBW">
+    <anvil-component type="m3._Components.Heading" name="main_heading" prop:align="center" prop:icon="" prop:scale="medium" prop:spacing='{"margin":[null,null,0,null],"padding":[null,null,0,null]}' prop:text="🏠 Lavori nelle sedi 🗓" container:grid_position="ZSMWIM,ZCSKLT"></anvil-component>
+    <anvil-component type="FlowPanel" name="filter_panel" container:grid_position="ABCDXY,QWERUI">
+      <anvil-component type="m3._Components.DropdownMenu" name="location_picker" prop:appearance="outlined" prop:label_text="Scegli la sede" on:change="self.location_picker_change"></anvil-component>
+      <anvil-component type="m3._Components.Button" name="recent_events_button" prop:appearance="filled" prop:text="Futuri, in corso o conclusi < 24h" on:click="self.recent_events_click"></anvil-component>
+      <anvil-component type="m3._Components.Button" name="past_events_button" prop:appearance="outlined" prop:text="Passati" on:click="self.past_events_click"></anvil-component>
+    </anvil-component>
+    <anvil-component type="RichText" name="rich_text_intro" prop:content="Questo è il calendario dei prossimi lavori nelle sedi.
+
+C'è ancora bisogno dell'aiuto di tutti! Fermatevi a parlare con capi o dirigenti per avere più informazioni." prop:spacing='{"margin":[null,null,null,0],"padding":[null,10,null,10]}' container:grid_position="ACBFWY,ERMRFS"></anvil-component>
+    <anvil-component type="RepeatingPanel" name="events_list" prop:item_template="Lavori_sedi.EventCard" container:grid_position="PXGMXA,IPMWMG"></anvil-component>
+  </anvil-component>
+</anvil-form>
