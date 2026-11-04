@@ -1,3 +1,7 @@
+import locale
+
+locale.setlocale(locale.LC_TIME, "it-IT-u-fw-mon")
+
 from ._anvil_designer import EventsFormTemplate
 from anvil import *
 import anvil.server
