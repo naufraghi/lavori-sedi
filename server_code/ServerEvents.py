@@ -25,9 +25,10 @@ def get_event_locations():
 def get_upcoming_events():
     now = datetime.now(anvil.tz.tzlocal())
     cutoff = now - timedelta(hours=24)
-    kwargs = {"end_datetime": q.greater_than(cutoff)}
-    if not is_clan():
-      kwargs['hidden'] = False
+    kwargs = {
+      "end_datetime": q.greater_than(cutoff),
+      "hidden": False,
+    }
     events = app_tables.events.search(tables.order_by("start_datetime"), **kwargs)
     return [dict(
         id=e.get_id(),
@@ -39,7 +40,7 @@ def get_upcoming_events():
         participants=e['participants'] or [],
         manager=e['manager'],
         hidden=e['hidden'],
-        modify=is_clan()
+        modify=False
     ) for e in events]
 
 @anvil.server.callable
