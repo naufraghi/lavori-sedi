@@ -38,9 +38,9 @@ def localize_date(message):
 
 def display_role(role):
   if role == "genitore":
-    return "Genitore/Amicə"
+    return "👥"
   if role == "clan":
-    return "Clan/Capo"
+    return "⚜️"
   return role
 
 class EventCard(EventCardTemplate):
@@ -66,7 +66,7 @@ class EventCard(EventCardTemplate):
       manager = '...'
     else:
       manager = f"{manager['name']} ({display_role(manager['role'])})"
-    self.participants.content = f"👷🏾 {manager} | 👥 " + ", ".join(participants)
+    self.participants.content = f"👷🏾 {manager} | " + ", ".join(participants)
 
   def signup_click(self, **event_args):
     # Open modal to sign up, passing the event ID

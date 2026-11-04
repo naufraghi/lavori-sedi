@@ -1,6 +1,9 @@
 <anvil-form container="ColumnPanel">
   <anvil-component type="ColumnPanel" name="main_column" prop:col_spacing="medium" prop:spacing_below="small" container:grid_position="RFNDEN,XYDZBW">
-    <anvil-component type="m3._Components.Heading" name="main_heading" prop:align="center" prop:icon="" prop:scale="medium" prop:spacing='{"margin":[null,null,0,null],"padding":[null,null,0,null]}' prop:text="🏠 Lavori nelle sedi 🗓" container:grid_position="ZSMWIM,ZCSKLT"></anvil-component>
+    <anvil-component type="FlowPanel" name="flow_panel_1" prop:align="center" container:grid_position="RSSHYP,VPENVH">
+      <anvil-component type="Image" name="image_cngei" prop:source="_/theme/logo.svg" prop:height="81"></anvil-component>
+      <anvil-component type="m3._Components.Heading" name="main_heading" prop:align="center" prop:icon="" prop:scale="medium" prop:spacing='{"margin":[null,null,0,null],"padding":[null,null,0,null]}' prop:text="🏠 Lavori nelle sedi CNGEI Torino 🗓"></anvil-component>
+    </anvil-component>
     <anvil-component type="m3._Components.Card" name="admin_toolbar_card" prop:appearance="outlined" container:grid_position="ABCDXY,QWERUI">
       <anvil-component type="m3._Components.Card.CardContentContainer" name="admin_toolbar_content" container:slot="card-content-slot">
         <anvil-component type="FlowPanel" name="filter_panel" prop:gap="medium" container:slot="card-content-container-slot">
