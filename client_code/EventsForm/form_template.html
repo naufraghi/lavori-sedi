@@ -11,7 +11,10 @@
         </anvil-component>
       </anvil-component>
     </anvil-component>
-    <anvil-component type="FlowPanel" name="location_filter_panel" container:grid_position="NQPLMF,WTSZKC"></anvil-component>
+    <anvil-component type="FlowPanel" name="location_filter_panel" container:grid_position="NQPLMF,WTSZKC">
+      <anvil-component type="m3._Components.Button" name="location_filter_all_preview" prop:appearance="filled" prop:text="Tutte le sedi"></anvil-component>
+      <anvil-component type="m3._Components.Button" name="location_filter_location_preview" prop:appearance="outlined" prop:text="Sede"></anvil-component>
+    </anvil-component>
     <anvil-component type="RichText" name="rich_text_intro" prop:content="Questo è il calendario dei prossimi lavori nelle sedi.
 
 C'è ancora bisogno dell'aiuto di tutti! Fermatevi a parlare con capi o dirigenti per avere più informazioni." prop:spacing='{"margin":[null,null,null,0],"padding":[null,10,null,10]}' container:grid_position="ACBFWY,ERMRFS"></anvil-component>
