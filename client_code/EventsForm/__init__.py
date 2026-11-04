@@ -7,6 +7,50 @@ from anvil import *
 import anvil.server
 from m3.components import Button as M3Button
 
+LOCATION_COLORS = [
+  'var(--anvil-m3-surface-container-low)',  # Keep the existing To1 card color.
+  '#E3F2FD',  # Light blue
+  '#FCE4EC',  # Light pink
+  '#E8F5E9',  # Light green
+  '#FFF3E0',  # Light orange
+  '#EDE7F6',  # Light purple
+  '#E0F7FA',  # Light cyan
+  '#F9FBE7',  # Light lime
+  '#FBE9E7',  # Light coral
+  '#E8EAF6',  # Light indigo
+]
+
+LOCATION_COLOR_INDICES = {
+  'to1': 0,
+  'to2': 1,
+  'to3': 2,
+  'to4': 3,
+  'to5': 4,
+}
+
+
+def location_key(location):
+  return location.split()[-1].lower()
+
+
+def get_location_colors(locations):
+  colors = {}
+  next_index = len(LOCATION_COLOR_INDICES)
+
+  for location in locations:
+    key = location_key(location)
+    if not key or key in colors:
+      continue
+
+    if key in LOCATION_COLOR_INDICES:
+      color_index = LOCATION_COLOR_INDICES[key]
+    else:
+      color_index = next_index % len(LOCATION_COLORS)
+      next_index += 1
+    colors[key] = LOCATION_COLORS[color_index]
+
+  return colors
+
 
 class EventsForm(EventsFormTemplate):
   def __init__(self, **properties):
@@ -23,6 +67,7 @@ class EventsForm(EventsFormTemplate):
 
   def load_events(self):
     self.locations = anvil.server.call('get_event_locations')
+    location_colors = get_location_colors(self.locations)
 
     if self.admin:
       self.all_events = anvil.server.call('get_all_events', self.past_events)
@@ -30,6 +75,11 @@ class EventsForm(EventsFormTemplate):
         event['past_events'] = self.past_events
     else:
       self.all_events = anvil.server.call('get_upcoming_events')
+
+    for event in self.all_events:
+      event['location_color'] = location_colors.get(
+        location_key(event['location']), LOCATION_COLORS[0]
+      )
 
     self.location_filter_panel.clear()
     self.location_filter_buttons = []

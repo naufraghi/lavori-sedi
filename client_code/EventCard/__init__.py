@@ -52,6 +52,7 @@ class EventCard(EventCardTemplate):
     self.populate()
 
   def populate(self):
+    self.card_1.background_color = self.item.get('location_color')
     timestamp = localize_date(f"{self.item['start'].strftime('%a %d %b, %H:%M')} - {self.item['end'].strftime('%H:%M')}")
     self.title.content = f"## 🧰 {self.item['title']} | 🗓 {timestamp} | 📍 {self.item['location']}"
     self.description.content = self.item['description']
