@@ -36,6 +36,13 @@ def localize_date(message):
     words[i] = ITALIAN_LOCALE.get(word, word)
   return " ".join(words)
 
+def display_role(role):
+  if role == "genitore":
+    return "Genitore/Amicə"
+  if role == "clan":
+    return "Clan/Capo"
+  return role
+
 class EventCard(EventCardTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
@@ -51,14 +58,14 @@ class EventCard(EventCardTemplate):
     participants = []
     for p in self.item['participants']:
       if p:
-        participants.append(f"{p['name']} ({p['role']})")
+        participants.append(f"{p['name']} ({display_role(p['role'])})")
       else:
         participants.append("<nome-rimosso>")
     manager = self.item['manager']
     if not manager:
       manager = '...'
     else:
-      manager = f"{manager['name']} ({manager['role']})"
+      manager = f"{manager['name']} ({display_role(manager['role'])})"
     self.participants.content = f"👷🏾 {manager} | 👥 " + ", ".join(participants)
 
   def signup_click(self, **event_args):
