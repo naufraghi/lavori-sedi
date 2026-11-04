@@ -11,11 +11,8 @@ class EventsForm(EventsFormTemplate):
     self.requested_location = properties.get('location')
     self.selected_location = self.requested_location
     self.past_events = properties.get('past_events', False)
-    self.filter_panel.visible = self.admin
+    self.admin_toolbar_card.visible = self.admin
     self.location_filter_panel.visible = True
-    self.recent_events_button.visible = self.admin
-    self.past_events_button.visible = self.admin
-    self.new_event_button.visible = self.admin
     self.location_filter_buttons = []
     self.update_admin_filter_buttons()
     self.load_events()

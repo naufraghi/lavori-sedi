@@ -1,10 +1,15 @@
 <anvil-form container="ColumnPanel">
   <anvil-component type="ColumnPanel" name="main_column" prop:col_spacing="medium" prop:spacing_below="small" container:grid_position="RFNDEN,XYDZBW">
     <anvil-component type="m3._Components.Heading" name="main_heading" prop:align="center" prop:icon="" prop:scale="medium" prop:spacing='{"margin":[null,null,0,null],"padding":[null,null,0,null]}' prop:text="🏠 Lavori nelle sedi 🗓" container:grid_position="ZSMWIM,ZCSKLT"></anvil-component>
-    <anvil-component type="FlowPanel" name="filter_panel" container:grid_position="ABCDXY,QWERUI">
-      <anvil-component type="m3._Components.Button" name="recent_events_button" prop:appearance="filled" prop:text="In corso" on:click="self.recent_events_click"></anvil-component>
-      <anvil-component type="m3._Components.Button" name="past_events_button" prop:appearance="outlined" prop:text="Passati" on:click="self.past_events_click"></anvil-component>
-      <anvil-component type="m3._Components.Button" name="new_event_button" prop:appearance="tonal" prop:icon="mi:add" prop:text="Nuovo evento" on:click="self.new_event_click"></anvil-component>
+    <anvil-component type="m3._Components.Card" name="admin_toolbar_card" prop:appearance="outlined" container:grid_position="ABCDXY,QWERUI">
+      <anvil-component type="m3._Components.Card.CardContentContainer" name="admin_toolbar_content" container:slot="card-content-slot">
+        <anvil-component type="FlowPanel" name="filter_panel" prop:gap="medium" container:slot="card-content-container-slot">
+          <anvil-component type="m3._Components.Button" name="recent_events_button" prop:appearance="filled" prop:text="In corso" on:click="self.recent_events_click"></anvil-component>
+          <anvil-component type="m3._Components.Button" name="past_events_button" prop:appearance="outlined" prop:text="Passati" on:click="self.past_events_click"></anvil-component>
+          <anvil-component type="Spacer" name="admin_toolbar_spacer" container:expand="true"></anvil-component>
+          <anvil-component type="m3._Components.Button" name="new_event_button" prop:appearance="tonal" prop:icon="mi:add" prop:text="Nuovo evento" on:click="self.new_event_click"></anvil-component>
+        </anvil-component>
+      </anvil-component>
     </anvil-component>
     <anvil-component type="FlowPanel" name="location_filter_panel" container:grid_position="NQPLMF,WTSZKC"></anvil-component>
     <anvil-component type="RichText" name="rich_text_intro" prop:content="Questo è il calendario dei prossimi lavori nelle sedi.
