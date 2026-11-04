@@ -55,7 +55,7 @@ dependencies:
   version: {version_tag: v1.2.2}
 metadata: {logo_img: 'asset:logo.svg', title: Lavori sedi CNGEI Torino}
 name: Lavori sedi
-native_deps: null
+native_deps: {head_html: <script>document.documentElement.lang = "it";</script>}
 package_name: Lavori_sedi
 runtime_options:
   client_version: '3'
