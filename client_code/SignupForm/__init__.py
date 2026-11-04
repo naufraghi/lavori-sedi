@@ -21,13 +21,16 @@ class SignupForm(SignupFormTemplate):
     if role == "genitore":
       self.genitore_radio.selected = True
       self.clan_radio.selected = False
+      self.amice_radio.selected = False
+    elif role == "amicə":
+      self.genitore_radio.selected = False
+      self.clan_radio.selected = False
+      self.amice_radio.selected = True
     else:
       self.genitore_radio.selected = False
       self.clan_radio.selected = True
-    if self.genitore_radio.selected:
-      role = "genitore"
-    else:
-      role = "clan"
+      self.amice_radio.selected = False
+    role = self._selected_role()
     if anvil.server.call('is_signed_up', self.event_id,
                         self.name_text.text,
                         self.email_text.text,
@@ -36,11 +39,17 @@ class SignupForm(SignupFormTemplate):
     else:
       self.rimuovi_button.enabled = False      
 
-  def iscriviti_button_click(self, **event_args):
+  def _selected_role(self):
     if self.genitore_radio.selected:
-      role = "genitore"
-    else:
-      role = "clan"
+      return "genitore"
+    if self.clan_radio.selected:
+      return "clan"
+    if self.amice_radio.selected:
+      return "amicə"
+    return "genitore"
+
+  def iscriviti_button_click(self, **event_args):
+    role = self._selected_role()
     anvil.server.call('sign_up', self.event_id,
                       self.name_text.text,
                       self.email_text.text,
@@ -54,10 +63,7 @@ class SignupForm(SignupFormTemplate):
               past_events=self.past_events)
 
   def rimuovi_button_click(self, **event_args):
-    if self.genitore_radio.selected:
-      role = "genitore"
-    else:
-      role = "clan"
+    role = self._selected_role()
     anvil.server.call('sign_out', self.event_id,
                       self.name_text.text,
                       self.email_text.text,

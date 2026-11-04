@@ -1,0 +1,24 @@
+<anvil-form container="ColumnPanel">
+    <anvil-component type="m3._Components.Card" name="card_1" container:grid_position="YXLIIR,WHNJGF">
+        <anvil-component type="m3._Components.Card.CardContentContainer" name="card_content_container_1" container:slot="card-content-slot">
+            <anvil-component type="LinearPanel" name="linear_panel_1" container:slot="card-content-container-slot">
+                <anvil-component type="RichText" name="evento_text"></anvil-component>
+                <anvil-component type="m3._Components.Text" name="indicazioni_text" prop:italic="true" prop:text="L'orario di partecipazione è indicativo, comunicate per altre vie eventuali note."></anvil-component>
+                <anvil-component type="m3._Components.TextInput.TextBox" name="name_text" prop:label="Nome" prop:placeholder="Mario"></anvil-component>
+                <anvil-component type="m3._Components.TextInput.TextBox" name="email_text" prop:label="E-Mail" prop:placeholder="mario@rossi.it" prop:visible="true"></anvil-component>
+                <anvil-component type="FlowPanel" name="flow_panel_1" prop:align="left" prop:vertical_align="middle">
+                    <anvil-component type="m3._Components.RadioButton" name="genitore_radio" prop:selected="true" prop:text="Genitore" prop:value="genitore"></anvil-component>
+                    <anvil-component type="m3._Components.RadioButton" name="clan_radio" prop:selected="false" prop:text="Clan" prop:value="clan"></anvil-component>
+                    <anvil-component type="m3._Components.RadioButton" name="amice_radio" prop:selected="false" prop:text="Amicə" prop:value="amicə"></anvil-component>
+                    <anvil-component type="Spacer" name="spacer_1"></anvil-component>
+                </anvil-component>
+                <anvil-component type="FlowPanel" name="flow_panel_2">
+                    <anvil-component type="m3._Components.Button" name="iscriviti_button" prop:text="Iscriviti" on:click="self.iscriviti_button_click"></anvil-component>
+                    <anvil-component type="Spacer" name="spacer_2" container:expand="true"></anvil-component>
+                    <anvil-component type="m3._Components.Button" name="rimuovi_button" prop:appearance="tonal" prop:enabled="true" prop:text="Rimuovi" on:click="self.rimuovi_button_click"></anvil-component>
+                    <anvil-component type="m3._Components.Button" name="indietro_button" prop:appearance="outlined" prop:icon="mi:arrow_back" prop:text="Indietro" on:click="self.indietro_button_click"></anvil-component>
+                </anvil-component>
+            </anvil-component>
+        </anvil-component>
+    </anvil-component>
+</anvil-form>
