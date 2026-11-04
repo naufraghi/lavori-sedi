@@ -9,9 +9,10 @@ class EventsForm(EventsFormTemplate):
     self.init_components(**properties)
     self.admin = properties.get('admin', False)
     self.requested_location = properties.get('location')
+    self.selected_location = self.requested_location
     self.past_events = properties.get('past_events', False)
     self.filter_panel.visible = self.admin
-    self.location_filter_panel.visible = not self.admin
+    self.location_filter_panel.visible = True
     self.recent_events_button.visible = self.admin
     self.past_events_button.visible = self.admin
     self.new_event_button.visible = self.admin
@@ -20,15 +21,14 @@ class EventsForm(EventsFormTemplate):
     self.load_events()
 
   def load_events(self):
+    self.locations = anvil.server.call('get_event_locations')
+
     if self.admin:
       self.all_events = anvil.server.call('get_all_events', self.past_events)
       for event in self.all_events:
         event['past_events'] = self.past_events
-      self.events_list.items = self.all_events
-      return
-
-    self.locations = anvil.server.call('get_event_locations')
-    self.all_events = anvil.server.call('get_upcoming_events')
+    else:
+      self.all_events = anvil.server.call('get_upcoming_events')
 
     self.location_filter_panel.clear()
     self.location_filter_buttons = []
@@ -36,12 +36,10 @@ class EventsForm(EventsFormTemplate):
     for location in self.locations:
       self.add_location_filter_button(location, location)
 
-    if self.requested_location in self.locations:
-      selected_location = self.requested_location
-    else:
-      selected_location = None
+    if self.selected_location not in self.locations:
+      self.selected_location = None
 
-    self.show_location(selected_location)
+    self.show_location(self.selected_location)
 
   def add_location_filter_button(self, label, location):
     button = M3Button(text=label, appearance='outlined')
@@ -84,6 +82,7 @@ class EventsForm(EventsFormTemplate):
       self.past_events_button.appearance = 'outlined'
 
   def show_location(self, location):
+    self.selected_location = location
     self.update_location_filter_buttons(location)
     if location:
       normalized_location = location.strip().lower()
