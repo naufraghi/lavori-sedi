@@ -1,6 +1,7 @@
 from ._anvil_designer import EventsFormTemplate
 from anvil import *
 import anvil.server
+from m3.components import Button as M3Button
 
 
 class EventsForm(EventsFormTemplate):
@@ -9,10 +10,12 @@ class EventsForm(EventsFormTemplate):
     self.admin = properties.get('admin', False)
     self.requested_location = properties.get('location')
     self.past_events = properties.get('past_events', False)
-    self.location_picker.visible = not self.admin
+    self.filter_panel.visible = self.admin
+    self.location_filter_panel.visible = not self.admin
     self.recent_events_button.visible = self.admin
     self.past_events_button.visible = self.admin
     self.new_event_button.visible = self.admin
+    self.location_filter_buttons = []
     self.update_admin_filter_buttons()
     self.load_events()
 
@@ -27,21 +30,37 @@ class EventsForm(EventsFormTemplate):
     self.locations = anvil.server.call('get_event_locations')
     self.all_events = anvil.server.call('get_upcoming_events')
 
-    self.location_picker.items = self.locations
-    self.location_picker.visible = bool(self.locations)
+    self.location_filter_panel.clear()
+    self.location_filter_buttons = []
+    self.add_location_filter_button('Tutte le sedi', None)
+    for location in self.locations:
+      self.add_location_filter_button(location, location)
 
     if self.requested_location in self.locations:
       selected_location = self.requested_location
-    elif self.locations:
-      selected_location = self.locations[0]
     else:
       selected_location = None
 
-    self.location_picker.selected_value = selected_location
     self.show_location(selected_location)
 
-  def location_picker_change(self, **event_args):
-    self.show_location(self.location_picker.selected_value)
+  def add_location_filter_button(self, label, location):
+    button = M3Button(text=label, appearance='outlined')
+    button.set_event_handler('click', self.make_location_filter_handler(location))
+    self.location_filter_panel.add_component(button)
+    self.location_filter_buttons.append((location, button))
+
+  def make_location_filter_handler(self, location):
+    def handler(**event_args):
+      self.show_location(location)
+    return handler
+
+  def update_location_filter_buttons(self, selected_location):
+    for location, button in self.location_filter_buttons:
+      if location is None:
+        selected = selected_location is None
+      else:
+        selected = (selected_location or '').strip().lower() == location.strip().lower()
+      button.appearance = 'filled' if selected else 'outlined'
 
   def recent_events_click(self, **event_args):
     self.past_events = False
@@ -65,6 +84,7 @@ class EventsForm(EventsFormTemplate):
       self.past_events_button.appearance = 'outlined'
 
   def show_location(self, location):
+    self.update_location_filter_buttons(location)
     if location:
       normalized_location = location.strip().lower()
       events = [event for event in self.all_events
