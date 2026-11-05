@@ -172,3 +172,7 @@ def is_clan():
 @anvil.server.route("/admin-events")
 def admin_events(**p):
   return anvil.server.FormResponse('EventsForm', admin=True)
+
+@anvil.server.route("/sede/:location")
+def events_for_location(location, **p):
+  return anvil.server.FormResponse('EventsForm', location=location)

@@ -87,10 +87,22 @@ class EventsForm(EventsFormTemplate):
     for location in self.locations:
       self.add_location_filter_button(location, location)
 
-    if self.selected_location not in self.locations:
-      self.selected_location = None
+    self.selected_location = self.resolve_location(self.selected_location)
 
     self.show_location(self.selected_location)
+
+  def resolve_location(self, location):
+    if not location:
+      return None
+
+    normalized_location = location.strip().lower()
+    for actual_location in self.locations:
+      actual_location_text = (actual_location or '').strip()
+      if actual_location_text.lower() == normalized_location:
+        return actual_location
+      if actual_location_text and location_key(actual_location_text) == normalized_location:
+        return actual_location
+    return None
 
   def add_location_filter_button(self, label, location):
     button = M3Button(text=label, appearance='outlined')
